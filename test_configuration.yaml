@@ -1,0 +1,52 @@
+esphome:
+  name: mipurifier
+  comment: for Xiaomi Mi Air Purifier 3H (and similar models using the same protocol)
+
+external_components:
+  - source:
+      type: local
+      path: ./components
+# Required configuration for the weird single core ESP-WROOM-32D module
+esp32:
+  board: esp32doit-devkit-v1
+  framework:
+    type: esp-idf
+    sdkconfig_options:
+      CONFIG_FREERTOS_UNICORE: y
+    advanced:
+      ignore_efuse_mac_crc: true
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  password: ""
+
+# Enable OTA updates
+ota:
+  password: ""
+
+# Wi-Fi configuration
+# EDIT CREDENTIALS OR PROVIDE YOUR OWN secrets.yaml
+wifi:
+  ssid: abc
+  password: "12345678"
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Mipurifier Fallback Hotspot"
+    password: "12345678"
+
+
+# Initialize the serial connection to the STM32 microcontroller
+uart:
+  id: uart_bus
+  tx_pin: GPIO17
+  rx_pin: GPIO16
+  baud_rate: 115200
+
+# Initialize our custom component
+mipurifier:
+    id: my_mipurifier
+
