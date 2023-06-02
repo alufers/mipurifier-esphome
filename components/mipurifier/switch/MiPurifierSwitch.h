@@ -12,6 +12,7 @@ enum class MiPurifierSwitchRole
 {
     BEEPER,
     LOCK,
+    POWER,
 };
 
 class MiPurifier;

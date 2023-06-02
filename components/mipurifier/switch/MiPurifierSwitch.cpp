@@ -10,4 +10,8 @@ void MiPurifierSwitch::write_state(bool state)
     {
         this->mipurifier->set_lock(state);
     }
+    else if (this->role == MiPurifierSwitchRole::POWER)
+    {
+        this->mipurifier->set_power(state);
+    }
 }

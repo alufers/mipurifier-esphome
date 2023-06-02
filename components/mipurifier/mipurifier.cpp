@@ -71,6 +71,20 @@ void MiPurifier::set_brightness(std::string brightness)
 }
 
 
+
+
+void MiPurifier::set_power(bool power)
+{
+    if (power)
+    {
+       strcpy(send_buffer, "down set_properties 2 2 true");
+    }
+    else
+    {
+          strcpy(send_buffer, "down set_properties 2 2 false");
+    }
+}
+
 void MiPurifier::set_lock(bool lock)
 {
     if (lock)
@@ -111,12 +125,12 @@ void MiPurifier::update_property(char *id, char *val)
     }
     else if (strcmp(id, "43") == 0)
     {
-        filterlife_sensor->publish_state(atof(val));
+        // filterlife_sensor->publish_state(atof(val));
     }
     else if (strcmp(id, "22") == 0)
     {
         // power (on, off)
-        // power_switch->publish_state(strcmp(val, "true") == 0);
+        power_switch->publish_state(strcmp(val, "true") == 0);
     }
     else if (strcmp(id, "25") == 0)
     {
@@ -288,5 +302,9 @@ void MiPurifier::set_switch(MiPurifierSwitch *sw)
     else if (sw->role == MiPurifierSwitchRole::LOCK)
     {
         this->lock_switch = sw;
+    }
+    else if (sw->role == MiPurifierSwitchRole::POWER)
+    {
+        this->power_switch = sw;
     }
 }

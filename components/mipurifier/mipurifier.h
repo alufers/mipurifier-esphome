@@ -27,18 +27,9 @@ public:
   // only run setup() after a Wi-Fi connection has been established successfully
   float get_setup_priority() const override { return esphome::setup_priority::AFTER_WIFI; }
 
-  void turn_on()
-  {
-    strcpy(send_buffer, "down set_properties 2 2 true");
-  }
-
-  void turn_off()
-  {
-    strcpy(send_buffer, "down set_properties 2 2 false");
-  }
 
 
-
+  void set_power(bool power);
   void set_beeper(bool beeper);
   void set_lock(bool lock);
 
@@ -70,6 +61,7 @@ protected:
   sensor::Sensor *humidity_sensor = NULL;    // new sensor::Sensor();
   sensor::Sensor *temperature_sensor = NULL; // new sensor::Sensor();
   sensor::Sensor *filterlife_sensor = NULL;  // new sensor::Sensor();
+  MiPurifierSwitch *power_switch = NULL;
   MiPurifierSwitch *lock_switch = NULL;
   MiPurifierSwitch *beeper_switch = NULL;
 

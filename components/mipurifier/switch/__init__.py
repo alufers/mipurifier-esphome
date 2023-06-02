@@ -11,6 +11,7 @@ DEPENDENCIES = ["mipurifier", "switch"]
 CONF_ROLE = "role"
 CONF_BEEPER = "beeper"
 CONF_LOCK = "lock"
+CONF_POWER = "power"
 
 MiPurifierSwitch = cg.global_ns.class_(
    "MiPurifierSwitch", switch.Switch, cg.Component)
@@ -26,6 +27,7 @@ CONFIG_SCHEMA = switch.switch_schema(
             cv.Required(CONF_ROLE): cv.enum({
                 CONF_BEEPER: MiPurifierSwitchRole.BEEPER,
                 CONF_LOCK: MiPurifierSwitchRole.LOCK,
+                CONF_POWER: MiPurifierSwitchRole.POWER,
             }),
         }
     )
