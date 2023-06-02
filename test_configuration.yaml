@@ -46,6 +46,23 @@ uart:
   rx_pin: GPIO16
   baud_rate: 115200
 
+sensor:
+  - platform: mipurifier
+    pm_2_5:
+      name: "Mipurifier PM2.5 Value"
+    temperature:
+      name: "Mipurifier Temperature Value"
+    humidity:
+      name: "Mipurifier Humidity Value"
+
+switch:
+  - platform: mipurifier
+    name: "Beeper"
+    role: beeper
+  - platform: mipurifier
+    name: "Child lock"
+    role: lock
+
 # Initialize our custom component
 mipurifier:
     id: my_mipurifier

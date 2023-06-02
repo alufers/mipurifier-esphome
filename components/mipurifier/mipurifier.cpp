@@ -54,7 +54,7 @@ void MiPurifier::set_mode(std::string mode)
     }
 }
 
-void MiPurifier::set_brightness(std::string brightness);
+void MiPurifier::set_brightness(std::string brightness)
 {
     if (brightness == "off")
     {
@@ -67,6 +67,31 @@ void MiPurifier::set_brightness(std::string brightness);
     else if (brightness == "high")
     {
         strcpy(send_buffer, "down set_properties 6 1 0");
+    }
+}
+
+
+void MiPurifier::set_lock(bool lock)
+{
+    if (lock)
+    {
+        strcpy(send_buffer, "down set_properties 7 1 true");
+    }
+    else
+    {
+        strcpy(send_buffer, "down set_properties 7 1 false");
+    }
+}
+
+void MiPurifier::set_beeper(bool beeper)
+{
+    if (beeper)
+    {
+        strcpy(send_buffer, "down set_properties 5 1 true");
+    }
+    else
+    {
+        strcpy(send_buffer, "down set_properties 5 1 false");
     }
 }
 
@@ -91,7 +116,7 @@ void MiPurifier::update_property(char *id, char *val)
     else if (strcmp(id, "22") == 0)
     {
         // power (on, off)
-        power_switch->publish_state(strcmp(val, "true") == 0);
+        // power_switch->publish_state(strcmp(val, "true") == 0);
     }
     else if (strcmp(id, "25") == 0)
     {
@@ -100,13 +125,13 @@ void MiPurifier::update_property(char *id, char *val)
         switch (atoi(val))
         {
         case 0:
-            mode_select->publish_state("auto");
+            // mode_select->publish_state("auto");
             break;
         case 1:
-            mode_select->publish_state("night");
+            // mode_select->publish_state("night");
             break;
         case 2:
-            mode_select->publish_state("manual");
+            // mode_select->publish_state("manual");
             break;
         case 3:
             is_preset = true;
@@ -121,13 +146,13 @@ void MiPurifier::update_property(char *id, char *val)
             switch (atoi(val))
             {
             case 1:
-                mode_select->publish_state("low");
+                // mode_select->publish_state("low");
                 break;
             case 2:
-                mode_select->publish_state("medium");
+                // mode_select->publish_state("medium");
                 break;
             case 3:
-                mode_select->publish_state("high");
+                // mode_select->publish_state("high");
                 break;
             }
         }
@@ -148,20 +173,20 @@ void MiPurifier::update_property(char *id, char *val)
         switch (atoi(val))
         {
         case 0:
-            brightness_select->publish_state("high");
+            // brightness_select->publish_state("high");
             break;
         case 1:
-            brightness_select->publish_state("low");
+            // brightness_select->publish_state("low");
             break;
         case 2:
-            brightness_select->publish_state("off");
+            // brightness_select->publish_state("off");
             break;
         }
     }
     else if (strcmp(id, "1010") == 0)
     {
         // manual speed
-        manualspeed->publish_state(atof(val) + 1);
+        // manualspeed->publish_state(atof(val) + 1);
     }
 }
 
@@ -181,7 +206,7 @@ void MiPurifier::loop()
             char *cmd = strtok(recv_buffer, " ");
             if (strcmp(cmd, "net") == 0)
             {
-                write_str("local");
+                this->write_str("local");
             }
             else if (strcmp(cmd, "time") == 0)
             {
@@ -250,5 +275,18 @@ void MiPurifier::loop()
                 write_str("ok");
             }
         }
+    }
+}
+
+void MiPurifier::set_switch(MiPurifierSwitch *sw)
+{
+
+    if (sw->role == MiPurifierSwitchRole::BEEPER)
+    {
+        this->beeper_switch = sw;
+    }
+    else if (sw->role == MiPurifierSwitchRole::LOCK)
+    {
+        this->lock_switch = sw;
     }
 }

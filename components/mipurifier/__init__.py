@@ -21,8 +21,9 @@ from esphome.const import (
 )
 from esphome.core import CORE
 
-DEPENDENCIES = ["uart"]
-
+DEPENDENCIES = ["uart", "sensor", "switch"]
+AUTO_LOAD = ["sensor", "switch"]
+CONF_MIPURIFIER_ID = "mipurifier_id"
 
 MiPurifier = cg.global_ns.class_(
     "MiPurifier", cg.Component, uart.UARTDevice)
@@ -33,25 +34,25 @@ CONFIG_SCHEMA = (
     cv.Schema(
         {
             cv.GenerateID(): cv.declare_id(MiPurifier),
-            cv.Optional(CONF_TEMPERATURE): sensor.sensor_schema(
-                unit_of_measurement=UNIT_CELSIUS,
-                accuracy_decimals=1,
-                device_class=DEVICE_CLASS_TEMPERATURE,
-                state_class=STATE_CLASS_MEASUREMENT,
-            ),
-            cv.Optional(CONF_HUMIDITY): sensor.sensor_schema(
-                unit_of_measurement=UNIT_PERCENT,
-                accuracy_decimals=1,
-                device_class=DEVICE_CLASS_HUMIDITY,
-                state_class=STATE_CLASS_MEASUREMENT,
-            ),
-            cv.Optional(CONF_PM_2_5): sensor.sensor_schema(
-                unit_of_measurement=UNIT_MICROGRAMS_PER_CUBIC_METER,
-                icon=ICON_GRAIN,
-                accuracy_decimals=0,
-                device_class=DEVICE_CLASS_PM25,
-                state_class=STATE_CLASS_MEASUREMENT,
-            ),
+            # cv.Optional(CONF_TEMPERATURE): sensor.sensor_schema(
+            #     unit_of_measurement=UNIT_CELSIUS,
+            #     accuracy_decimals=1,
+            #     device_class=DEVICE_CLASS_TEMPERATURE,
+            #     state_class=STATE_CLASS_MEASUREMENT,
+            # ),
+            # cv.Optional(CONF_HUMIDITY): sensor.sensor_schema(
+            #     unit_of_measurement=UNIT_PERCENT,
+            #     accuracy_decimals=1,
+            #     device_class=DEVICE_CLASS_HUMIDITY,
+            #     state_class=STATE_CLASS_MEASUREMENT,
+            # ),
+            # cv.Optional(CONF_PM_2_5): sensor.sensor_schema(
+            #     unit_of_measurement=UNIT_MICROGRAMS_PER_CUBIC_METER,
+            #     icon=ICON_GRAIN,
+            #     accuracy_decimals=0,
+            #     device_class=DEVICE_CLASS_PM25,
+            #     state_class=STATE_CLASS_MEASUREMENT,
+            # ),
 
 
         },
@@ -60,13 +61,11 @@ CONFIG_SCHEMA = (
     .extend(uart.UART_DEVICE_SCHEMA)
 )
 
-print(CONFIG_SCHEMA)
+
 
 
 async def to_code(config):
-    # print(config[CONF_ID])
-  
-    print( CORE.component_ids)
+    print("DUPA DUPA DUPA")
     var = cg.new_Pvariable(config[CONF_ID])
     await cg.register_component(var, config)
     # await fan.register_fan(var, config)
