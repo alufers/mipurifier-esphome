@@ -21,7 +21,7 @@ from esphome.const import (
 )
 from esphome.core import CORE
 
-DEPENDENCIES = ["uart", "sensor", "switch"]
+DEPENDENCIES = ["uart", "sensor", "switch", "select"]
 AUTO_LOAD = ["sensor", "switch"]
 CONF_MIPURIFIER_ID = "mipurifier_id"
 

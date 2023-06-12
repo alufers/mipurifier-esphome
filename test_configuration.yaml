@@ -57,11 +57,22 @@ sensor:
 
 switch:
   - platform: mipurifier
+    name: "Power"
+    role: power
+  - platform: mipurifier
     name: "Beeper"
     role: beeper
   - platform: mipurifier
     name: "Child lock"
     role: lock
+
+select:
+  - platform: mipurifier
+    name: "Mode"
+    role: mode
+  - platform: mipurifier
+    name: "Screen brightness"
+    role: screen_brightness
 
 # Initialize our custom component
 mipurifier:

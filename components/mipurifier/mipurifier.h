@@ -5,11 +5,14 @@
 
 #include "esphome/components/uart/uart.h"
 #include "switch/MiPurifierSwitch.h"
+#include "select/MiPurifierSelect.h"
+
 
 // logging macros won't work if we don't do this
 using namespace esphome;
 
 class MiPurifierSwitch;
+class MiPurifierSelect;
 
 class MiPurifier : public Component, public uart::UARTDevice, public api::CustomAPIDevice
 {
@@ -41,10 +44,7 @@ public:
     snprintf(send_buffer, max_line_length, "down set_properties 10 10 %i", speed);
   }
 
-  void send_command(std::string s)
-  {
-    strcpy(send_buffer, s.c_str());
-  }
+  void send_command(std::string s);
 
   void update_property(char *id, char *val);
 
@@ -55,6 +55,7 @@ public:
   void set_temperature_sensor(sensor::Sensor *temperature_sensor) { this->temperature_sensor = temperature_sensor; }
   void set_humidity_sensor(sensor::Sensor *humidity_sensor) { this->humidity_sensor = humidity_sensor; }
   void set_switch(MiPurifierSwitch *sw);
+  void set_select(MiPurifierSelect *sel);
 
 protected:
   sensor::Sensor *airquality_sensor = NULL;  // new sensor::Sensor();
@@ -64,6 +65,9 @@ protected:
   MiPurifierSwitch *power_switch = NULL;
   MiPurifierSwitch *lock_switch = NULL;
   MiPurifierSwitch *beeper_switch = NULL;
+
+  MiPurifierSelect *mode_select = NULL;
+  MiPurifierSelect *brightness_select = NULL;
 
   // esphome::switch_::Switch *beeper_switch = NULL;
 };

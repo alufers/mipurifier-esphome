@@ -42,4 +42,4 @@ async def to_code(config):
     await cg.register_component(var, config)
     await switch.register_switch(var, config)
 
-    # cg.add(mp_var.set_switch(var))
+    cg.add(mp_var.set_switch(var))

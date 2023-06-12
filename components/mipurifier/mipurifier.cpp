@@ -139,13 +139,13 @@ void MiPurifier::update_property(char *id, char *val)
         switch (atoi(val))
         {
         case 0:
-            // mode_select->publish_state("auto");
+            mode_select->publish_state("auto");
             break;
         case 1:
-            // mode_select->publish_state("night");
+            mode_select->publish_state("night");
             break;
         case 2:
-            // mode_select->publish_state("manual");
+            mode_select->publish_state("manual");
             break;
         case 3:
             is_preset = true;
@@ -160,13 +160,13 @@ void MiPurifier::update_property(char *id, char *val)
             switch (atoi(val))
             {
             case 1:
-                // mode_select->publish_state("low");
+                mode_select->publish_state("low");
                 break;
             case 2:
-                // mode_select->publish_state("medium");
+                mode_select->publish_state("medium");
                 break;
             case 3:
-                // mode_select->publish_state("high");
+                mode_select->publish_state("high");
                 break;
             }
         }
@@ -187,13 +187,13 @@ void MiPurifier::update_property(char *id, char *val)
         switch (atoi(val))
         {
         case 0:
-            // brightness_select->publish_state("high");
+            brightness_select->publish_state("high");
             break;
         case 1:
-            // brightness_select->publish_state("low");
+            brightness_select->publish_state("low");
             break;
         case 2:
-            // brightness_select->publish_state("off");
+            brightness_select->publish_state("off");
             break;
         }
     }
@@ -308,3 +308,21 @@ void MiPurifier::set_switch(MiPurifierSwitch *sw)
         this->power_switch = sw;
     }
 }
+
+
+void MiPurifier::set_select(MiPurifierSelect *sw)
+{
+    if (sw->role == MiPurifierSelectRole::MODE)
+    {
+        this->mode_select = sw;
+    }
+    else if (sw->role == MiPurifierSelectRole::SCREEN_BRIGHTNESS)
+    {
+        this->brightness_select = sw;
+    }
+}
+
+void MiPurifier::send_command(std::string s)
+  {
+    strcpy(send_buffer, s.c_str());
+  }
