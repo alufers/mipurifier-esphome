@@ -206,7 +206,7 @@ void MiPurifier::update_property(char *id, char *val)
 
 void MiPurifier::setup()
 {
-    register_service(&MiPurifier::send_command, "send_command", {"command"});
+    // register_service(&MiPurifier::send_command, "send_command", {"command"});
     // get initial state & settings
     strcpy(send_buffer, "down get_properties 2 2 2 5 5 1 6 1 7 1 10 10");
 }

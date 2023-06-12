@@ -14,7 +14,7 @@ using namespace esphome;
 class MiPurifierSwitch;
 class MiPurifierSelect;
 
-class MiPurifier : public Component, public uart::UARTDevice, public api::CustomAPIDevice
+class MiPurifier : public Component, public uart::UARTDevice
 {
 public:
   static const int max_line_length = 80;
