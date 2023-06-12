@@ -68,5 +68,6 @@ async def to_code(config):
     print("DUPA DUPA DUPA")
     var = cg.new_Pvariable(config[CONF_ID])
     await cg.register_component(var, config)
+    await uart.register_uart_device(var, config)
     # await fan.register_fan(var, config)
     

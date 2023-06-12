@@ -24,7 +24,6 @@ public:
   bool is_preset;
   int last_heartbeat, last_query;
 
-  // MiPurifier(UARTComponent *uart) : UARTDevice(uart) {}
 
   int readline(int readch, char *buffer, int len);
 
