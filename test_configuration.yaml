@@ -81,6 +81,8 @@ sensor:
       name: "${devicename} Temperature Value"
     humidity:
       name: "${devicename} Humidity Value"
+    filter_life:
+      name: "${devicename} Filter Life"
 
 switch:
   - platform: mipurifier

@@ -54,14 +54,15 @@ public:
   void set_airquality_sensor(sensor::Sensor *airquality_sensor) { this->airquality_sensor = airquality_sensor; }
   void set_temperature_sensor(sensor::Sensor *temperature_sensor) { this->temperature_sensor = temperature_sensor; }
   void set_humidity_sensor(sensor::Sensor *humidity_sensor) { this->humidity_sensor = humidity_sensor; }
+  void set_filter_life_sensor(sensor::Sensor *filter_life_sensor) { this->filter_life_sensor = filter_life_sensor; }
   void set_switch(MiPurifierSwitch *sw);
   void set_select(MiPurifierSelect *sel);
 
 protected:
-  sensor::Sensor *airquality_sensor = NULL;  // new sensor::Sensor();
-  sensor::Sensor *humidity_sensor = NULL;    // new sensor::Sensor();
-  sensor::Sensor *temperature_sensor = NULL; // new sensor::Sensor();
-  sensor::Sensor *filterlife_sensor = NULL;  // new sensor::Sensor();
+  sensor::Sensor *airquality_sensor = NULL;
+  sensor::Sensor *humidity_sensor = NULL;
+  sensor::Sensor *temperature_sensor = NULL; 
+  sensor::Sensor *filter_life_sensor = NULL;
   MiPurifierSwitch *power_switch = NULL;
   MiPurifierSwitch *lock_switch = NULL;
   MiPurifierSwitch *beeper_switch = NULL;

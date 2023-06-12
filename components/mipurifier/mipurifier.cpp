@@ -125,7 +125,7 @@ void MiPurifier::update_property(char *id, char *val)
     }
     else if (strcmp(id, "43") == 0)
     {
-        // filterlife_sensor->publish_state(atof(val));
+        filter_life_sensor->publish_state(atof(val));
     }
     else if (strcmp(id, "22") == 0)
     {
